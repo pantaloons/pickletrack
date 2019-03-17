@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+	<head>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-74658854-2"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'UA-74658854-2');
+		</script>
+		<meta charset="utf-8"/>
+		<title>Pickletrack</title>
+		<meta name="description" content="Locate picklebacks in New York City. Fast.">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style type="text/css">
+			html, body, #container {
+				height: 100%;
+				margin: 0px;
+				padding: 0px;
+			}
+			#container {
+				min-height: calc(100% - 3em);
+				height: auto;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			#footer {
+				height: 3em;
+				text-align: right;
+			}
+			#inner {
+				padding: 1.2em;
+			}
+			p {
+				margin: 0px;
+				padding: 0px;
+				text-align: center;
+			}
+			.pfooter {
+				text-align: right;
+				padding-right: 1.2em;
+			}
+			#content {
+				font-weight: bold;
+				font-size: 3em;
+			}
+			#description {
+				font-size: 1.5em;
+			}
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
+			a#about {
+				color: grey;
+				text-decoration: none;
+			}
+		</style>
+		<script type="text/javascript">
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function(position) {
+					var xhr = new XMLHttpRequest();
+
+					xhr.open('GET',
+						'locate?lat=' + position.coords.latitude +
+							  '&lng=' + position.coords.longitude);
+					xhr.responseType = 'json';
+
+					xhr.onerror = function() {
+						document.getElementById("content").innerHTML = "Unable to locate picklebacks :(";
+					}
+
+					xhr.onload = function() {
+						if (this.response.id === '') {
+							document.getElementById("content").innerHTML = "No picklebacks nearby :(";
+						}
+						else {
+							document.getElementById("venue").href = "http://foursquare.com/v/" + this.response.id;
+							document.getElementById("venue").innerHTML = this.response.name;
+							document.getElementById("description").innerHTML = '“' + this.response.comment + '”';
+						}
+					}
+
+					xhr.send();
+				}, function() {
+					document.getElementById("content").innerHTML = "Could not access location :(";
+				});
+			} else {
+				document.getElementById("content").innerHTML = "Browser does not support geolocation :(";
+			}
+		</script>
+	</head>
+	<body>
+		<div id="container">
+			<div id="inner">
+				<p id="content"><a id="venue">Locating pickleback...</a></p>
+				<p id="description"></p>
+			</div>
+		</div>
+		<div id="footer">
+			<p class="pfooter"><a id="about" href="about">About</a></p>
+			<p class="pfooter">Powered by Foursquare</p>
+		</div>
+	</body>
+</html>

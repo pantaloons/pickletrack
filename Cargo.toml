@@ -1,0 +1,17 @@
+[package]
+name = "pickletrack"
+version = "3.0.0"
+authors = ["Michael McGee <michael@mcgee.nz>"]
+edition = "2018"
+
+[dependencies]
+actix-web = { version = "*", features = [] }
+serde = { version = "*", features = ["derive"] }
+serde_json = "*"
+serde_derive = "*"
+rand = "*"
+reqwest = "*"
+chrono = "*"
+log = "*"
+env_logger = "*"
+tokio = "*"
