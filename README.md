@@ -4,7 +4,7 @@ Pickletrack is a service which finds the nearest bar serving picklebacks in New 
 Pickletrack has two main components, a scraper and a web server.
 
 ## Scraper
-The scraper accesses the Foursquare API to build a database of bars and their comments mentioning the phrase "pickleback". The scraper is run independently of the web server, and writes output to a JSON file under static/data/YYYYMMDD.json, it then updates a symlink to this file at static/data/current.json.
+The scraper accesses the Foursquare API to build a database of bars and their comments mentioning the phrase "pickleback". The scraper is run independently of the web server, and writes output to a JSON file under `static/data/YYYYMMDD.json`, it then updates a symlink to this file at `static/data/current.json`.
 
 ## Server
 The web server reloads the list of bars every day and then uses this information, along with a users location to determine nearby bars to suggest.
